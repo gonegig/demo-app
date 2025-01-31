@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      linux: latest
+    commands:
+      - sudo yum update -y
+      - sudo yum install -y nginx
+
+  build:
+    commands:
+      - echo "Starting Nginx service..."
+      - sudo systemctl start nginx
+      - sudo systemctl enable nginx
+      - echo "Copying index.html to /var/www/html/"
+      - sudo cp index.html /var/www/html/
+
+artifacts:
+  files:
+    - /var/www/html/**
+  name: nginx-artifact
