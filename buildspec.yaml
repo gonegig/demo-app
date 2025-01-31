@@ -3,18 +3,17 @@ version: 0.2
 phases:
   install:
     commands:
-      - apt update -y
-      - apt install -y nginx
+      - yum update -y
+      - yum install -y nginx
 
   build:
     commands:
-      - echo "Starting Nginx service..."
-      - sudo systemctl start nginx
-      - sudo systemctl enable nginx
-      - echo "Copying index.html to /var/www/html/"
-      - sudo cp index.html /var/www/html/
+      - mkdir -p /var/www/html
+      - cp index.html /var/www/html/
+      - nginx -g 'daemon off;' &  # Starts Nginx in the background
 
 artifacts:
   files:
-    - /var/www/html/**
+    - '**/*'
+  base-directory: /var/www/html
   name: nginx-artifact
