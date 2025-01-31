@@ -3,8 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - yum update -y
-      - yum install -y nginx
+      - apt update -y
+      - apt install -y nginx
 
   build:
     commands:
